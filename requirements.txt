@@ -1,0 +1,14 @@
+# SKU Selection Tool - Dependencies
+# Add packages here as needed and run: pip install -r requirements.txt
+
+# Data processing
+pandas
+numpy
+openpyxl
+xlrd
+
+# Web framework (if needed for UI)
+flask
+
+# Utilities
+python-dotenv
