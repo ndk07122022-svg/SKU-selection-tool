@@ -30,7 +30,7 @@ const Dashboard = () => {
 
     // Calculate aggregated metrics from the raw data
     const metrics = useMemo(() => {
-        if (!skus.length) return null;
+        if (!Array.isArray(skus) || skus.length === 0) return null;
 
         let totalSkus = skus.length;
         let launchNow = 0;
