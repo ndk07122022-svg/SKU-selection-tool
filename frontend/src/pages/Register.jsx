@@ -15,8 +15,14 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setLoading(true);
         setError('');
+
+        if (!email.toLowerCase().endsWith('@scaleglobal.com')) {
+            setError('Only @scaleglobal.com email addresses are allowed.');
+            return;
+        }
+
+        setLoading(true);
 
         try {
             await register(username, email, password);

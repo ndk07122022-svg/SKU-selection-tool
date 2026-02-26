@@ -11,8 +11,13 @@ from app.core.security import get_password_hash, verify_password, create_access_
 
 router = APIRouter()
 
+ALLOWED_EMAIL_DOMAIN = "@scaleglobal.com"
+
 @router.post("/register", response_model=UserResponse)
 async def register_user(user: UserCreate, db: AsyncSession = Depends(get_db)):
+    if not user.email.lower().endswith(ALLOWED_EMAIL_DOMAIN):
+        raise HTTPException(status_code=400, detail="Only @scaleglobal.com email addresses are allowed.")
+
     result = await db.execute(select(User).filter(User.username == user.username))
     if result.scalars().first():
         raise HTTPException(status_code=400, detail="Username already registered")
